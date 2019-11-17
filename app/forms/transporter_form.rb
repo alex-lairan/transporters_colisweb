@@ -1,36 +1,5 @@
-class ValidationError
-  def initialize(path, text)
-    @path = path
-    @text = text
-  end
-
-  def as_json(*)
-    {
-        path: @path,
-        text: @text
-    }
-  end
-  alias_method :to_h, :as_json
-
-  def to_json
-    as_json.to_json
-  end
-end
-
-class TransporterForm
+class TransporterForm < ApplicationForm
   SIRET_ERROR = ValidationError.new(['SIRET'], 'must be uniq').freeze
-
-  def initialize(validator:, klass: Transporter)
-    @validator = validator
-    @klass = klass
-  end
-
-  def call(params)
-    @validator.call(params)
-              .to_monad
-              .or { |schema| return Dry::Monads::Failure(schema_error_mapper(schema.errors)) }
-              .bind { |transporter_schema| on_success(transporter_schema) }
-  end
 
   private
 
@@ -47,7 +16,7 @@ class TransporterForm
   end
 
   def siret_exists?(siret)
-    @klass.where(siret: siret).exists?
+    Transporter.where(siret: siret).exists?
   end
 
   def extract_transporter(schema)
@@ -77,9 +46,5 @@ class TransporterForm
     end
 
     Carrier.import carriers
-  end
-
-  def schema_error_mapper(errors)
-    errors.map { |error| ValidationError.new(error.path, error.text) }
   end
 end
