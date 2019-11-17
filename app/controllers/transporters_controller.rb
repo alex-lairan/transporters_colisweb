@@ -10,8 +10,4 @@ class TransportersController < ApplicationController
       m.failure { |errors| render_error errors }
     end
   end
-
-  def render_error(body, code = 400)
-    render json: { errors: body }, status: code
-  end
 end
