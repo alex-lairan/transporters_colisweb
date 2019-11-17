@@ -10,4 +10,8 @@
 #
 
 class Transporter < ActiveRecord::Base
+  has_many :carriers
+
+  has_many :transporter_postal_codes
+  has_many :postal_codes, through: :transporter_postal_codes
 end

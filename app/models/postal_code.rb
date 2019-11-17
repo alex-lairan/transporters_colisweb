@@ -9,4 +9,6 @@
 #
 
 class PostalCode < ActiveRecord::Base
+  has_many :transporter_postal_codes
+  has_many :transporters, through: :transporter_postal_codes
 end
