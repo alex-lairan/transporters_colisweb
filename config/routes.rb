@@ -56,4 +56,5 @@ Rails.application.routes.draw do
 
   post '/transporters', to: 'transporters#create'
   get '/transporters/:transporter_id/carriers', to: 'transporters/carriers#index'
+  put '/carrier/:carrier_id/trackings', to: 'carriers/trackings#create'
 end
