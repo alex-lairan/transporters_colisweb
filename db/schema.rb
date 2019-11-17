@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191114175235) do
+ActiveRecord::Schema.define(version: 20191117154532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20191114175235) do
   end
 
   add_index "carriers", ["transporter_id"], name: "index_carriers_on_transporter_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.float    "altitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "postal_codes", force: :cascade do |t|
     t.string   "code"
