@@ -15,4 +15,6 @@
 
 class Carrier < ActiveRecord::Base
   belongs_to :transporter
+
+  has_many :locations
 end
