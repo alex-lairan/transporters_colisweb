@@ -61,7 +61,6 @@ Rails.application.routes.draw do
   get '/transporters/by_postal_codes', to: 'stats/transporters_postal_codes#index'
 
 
-  # get '/carriers/passed_by/:latitude/:longitude'
-  #
-  # get '/transporters/with_carriers_passed_by/:latitude/:longitude'
+  get '/carriers/passed_by/:latitude/:longitude', to: 'stats/carriers_tracking#index'
+  get '/transporters/with_carriers_passed_by/:latitude/:longitude', to: 'stats/transporters_tracking#index'
 end
