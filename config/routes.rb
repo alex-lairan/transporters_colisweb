@@ -59,4 +59,9 @@ Rails.application.routes.draw do
   put '/carrier/:carrier_id/trackings', to: 'carriers/trackings#create'
 
   get '/transporters/by_postal_codes', to: 'stats/transporters_postal_codes#index'
+
+
+  # get '/carriers/passed_by/:latitude/:longitude'
+  #
+  # get '/transporters/with_carriers_passed_by/:latitude/:longitude'
 end
